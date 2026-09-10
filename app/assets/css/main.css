@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+@theme {
+  --color-inverse-on-surface: #f4f0ee;
+  --color-primary-fixed-dim: #ffb59b;
+  --color-primary: #9a401d;
+  --color-outline-variant: #dcc1b8;
+  --color-on-tertiary-container: #fffbff;
+  --color-surface-container-high: #ece7e5;
+  --color-surface-container: #f2edeb;
+  --color-on-error: #ffffff;
+  --color-primary-container: #ba5832;
+  --color-error: #ba1a1a;
+  --color-surface-container-highest: #e6e2df;
+  --color-tertiary-container: #7a7467;
+  --color-on-surface-variant: #56423c;
+  --color-error-container: #ffdad6;
+  --color-secondary-container: #b5ecd1;
+  --color-secondary: #356853;
+  --color-on-error-container: #93000a;
+  --color-on-secondary-fixed-variant: #1b503c;
+  --color-surface: #fdf8f6;
+  --color-on-tertiary-fixed-variant: #4b463b;
+  --color-secondary-fixed: #b8eed4;
+  --color-secondary-fixed-dim: #9cd2b9;
+  --color-on-tertiary-fixed: #1f1b12;
+  --color-surface-container-lowest: #ffffff;
+  --color-tertiary: #615c50;
+  --color-primary-fixed: #ffdbcf;
+  --color-surface-bright: #fdf8f6;
+  --color-on-primary-container: #fffbff;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-fixed-dim: #cdc6b7;
+  --color-tertiary-fixed: #eae2d2;
+  --color-on-secondary-fixed: #002115;
+  --color-on-secondary: #ffffff;
+  --color-on-secondary-container: #396c57;
+  --color-on-primary-fixed: #380d00;
+  --color-background: #fdf8f6;
+  --color-on-primary: #ffffff;
+  --color-inverse-primary: #ffb59b;
+  --color-surface-variant: #e6e2df;
+  --color-on-primary-fixed-variant: #7e2c08;
+  --color-on-background: #1c1b1a;
+  --color-surface-container-low: #f7f3f0;
+  --color-outline: #89726a;
+  --color-on-surface: #1c1b1a;
+  --color-surface-tint: #9d431f;
+  --color-inverse-surface: #31302f;
+  --color-surface-dim: #ddd9d7;
+
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+
+  --spacing-space-3xs: 0.125rem;
+  --spacing-space-2xs: 0.25rem;
+  --spacing-space-xs: 0.5rem;
+  --spacing-space-sm: 0.75rem;
+  --spacing-space-md: 1rem;
+  --spacing-space-lg: 1.5rem;
+  --spacing-space-xl: 2rem;
+  --spacing-space-2xl: 3rem;
+  --spacing-space-3xl: 4rem;
+  --spacing-space-4xl: 6rem;
+  --spacing-content-measure-prose: 44rem;
+  --spacing-content-measure-wide: 72rem;
+
+  --font-button-label: "Plus Jakarta Sans", sans-serif;
+  --font-display-hero: "Newsreader", serif;
+  --font-headline-lg: "Newsreader", serif;
+  --font-display-hero-mobile: "Newsreader", serif;
+  --font-headline-sm: "Newsreader", serif;
+  --font-meta-tag: "JetBrains Mono", monospace;
+  --font-body-sm: "Plus Jakarta Sans", sans-serif;
+  --font-headline-md: "Newsreader", serif;
+  --font-code-inline: "JetBrains Mono", monospace;
+  --font-body-lg: "Plus Jakarta Sans", sans-serif;
+  --font-headline-lg-mobile: "Newsreader", serif;
+  --font-body-md: "Plus Jakarta Sans", sans-serif;
+
+  --text-button-label: 0.875rem;
+  --text-button-label--line-height: 1.25rem;
+  --text-button-label--letter-spacing: 0.01em;
+  --text-button-label--font-weight: 600;
+
+  --text-display-hero: 3.5rem;
+  --text-display-hero--line-height: 4.25rem;
+  --text-display-hero--letter-spacing: -0.02em;
+  --text-display-hero--font-weight: 400;
+
+  --text-headline-lg: 2.25rem;
+  --text-headline-lg--line-height: 2.75rem;
+  --text-headline-lg--letter-spacing: -0.015em;
+  --text-headline-lg--font-weight: 400;
+
+  --text-display-hero-mobile: 2.5rem;
+  --text-display-hero-mobile--line-height: 3rem;
+  --text-display-hero-mobile--letter-spacing: -0.015em;
+  --text-display-hero-mobile--font-weight: 400;
+
+  --text-headline-sm: 1.25rem;
+  --text-headline-sm--line-height: 1.75rem;
+  --text-headline-sm--font-weight: 500;
+
+  --text-meta-tag: 0.75rem;
+  --text-meta-tag--line-height: 1rem;
+  --text-meta-tag--letter-spacing: 0.04em;
+  --text-meta-tag--font-weight: 500;
+
+  --text-body-sm: 0.875rem;
+  --text-body-sm--line-height: 1.45rem;
+  --text-body-sm--font-weight: 400;
+
+  --text-headline-md: 1.5rem;
+  --text-headline-md--line-height: 2rem;
+  --text-headline-md--letter-spacing: -0.01em;
+  --text-headline-md--font-weight: 500;
+
+  --text-code-inline: 0.875rem;
+  --text-code-inline--line-height: 1.25rem;
+  --text-code-inline--font-weight: 400;
+
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.875rem;
+  --text-body-lg--font-weight: 400;
+
+  --text-headline-lg-mobile: 1.75rem;
+  --text-headline-lg-mobile--line-height: 2.25rem;
+  --text-headline-lg-mobile--letter-spacing: -0.01em;
+  --text-headline-lg-mobile--font-weight: 400;
+
+  --text-body-md: 1rem;
+  --text-body-md--line-height: 1.65rem;
+  --text-body-md--font-weight: 400;
+}
+
+@layer base {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    overscroll-behavior: none;
+  }
+  main > :first-child {
+    margin-top: 0 !important;
+  }
+  main > :last-child {
+    margin-bottom: 0 !important;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
