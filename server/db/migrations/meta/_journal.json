@@ -8,6 +8,48 @@
       "when": 1789106468304,
       "tag": "0000_chilly_rocket_racer",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1789196789038,
+      "tag": "0001_flat_juggernaut",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1789196925898,
+      "tag": "0002_flashy_malcolm_colcord",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1789196977006,
+      "tag": "0003_new_proudstar",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1789197344803,
+      "tag": "0004_stale_felicia_hardy",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1789197420949,
+      "tag": "0005_fixed_sleeper",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1789201134441,
+      "tag": "0006_mysterious_kree",
+      "breakpoints": true
     }
   ]
 }

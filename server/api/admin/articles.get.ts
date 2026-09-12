@@ -2,15 +2,16 @@ import { desc } from "drizzle-orm";
 import { articles } from "~~/server/db/schema";
 
 export default defineEventHandler(async (event) => {
+  // jika ada limit role admin saja yang diijinkan
+  // const session = await auth.api.getSession({ headers: event.headers })
+
+  // if (!session || session.user.role !== 'admin') {
+  //   throw createError({ statusCode: 403, message: 'Akses ditolak' })
+  // }
   try {
     const allArticles = await db.query.articles.findMany({
       with: { author: true, category: true },
       orderBy: desc(articles.createdAt),
-    });
-
-    throw createError({
-      statusCode: 404,
-      message: "Articles not found",
     });
 
     return {

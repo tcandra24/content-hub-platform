@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+definePageMeta({
+  middleware: "auth",
+});
 const navNuxtLinks = ref([
   { path: "/admin", label: "Dashboard & Articles", icon: "dashboard" },
   { path: "/admin/editor", label: "New Post Editor", icon: "edit_note" },
