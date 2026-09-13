@@ -1,12 +1,15 @@
-import { desc, eq } from "drizzle-orm";
+import { desc, eq, and } from "drizzle-orm";
 import { articles } from "~~/server/db/schema";
 
 export default defineEventHandler(async (event) => {
   try {
+    const params = getQuery(event);
+    const contentType = params.contentType as "tech" | "personal" | undefined;
+
     const allArticles = await db.query.articles.findMany({
-      where: eq(articles.status, "published"),
-      with: { author: true, category: true },
-      orderBy: desc(articles.createdAt),
+      where: and(eq(articles.status, "published"), contentType ? eq(articles.contentType, contentType) : undefined),
+      with: { author: true, category: true, articleTags: { with: { tag: true } } },
+      orderBy: [desc(articles.createdAt)],
     });
 
     return {

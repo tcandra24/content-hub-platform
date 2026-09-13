@@ -1,3 +1,11 @@
+<script lang="ts" setup>
+const { data } = await useFetch("/api/articles", {
+  query: {
+    contentType: "tech",
+  },
+});
+</script>
+
 <template>
   <div class="flex flex-col w-full">
     <div class="relative w-full">
@@ -81,30 +89,29 @@
           </div>
 
           <div class="space-y-space-md">
-            <article class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all duration-300 flex flex-col space-y-space-sm group">
+            <article v-for="article in data.articles" :key="article?.id" class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all duration-300 flex flex-col space-y-space-sm group">
               <div class="flex flex-wrap items-center justify-between gap-space-xs">
                 <div class="flex items-center gap-space-xs">
-                  <span class="font-meta-tag text-meta-tag px-space-xs py-space-3xs rounded bg-primary/10 text-primary font-semibold">RUST</span>
+                  <span class="font-meta-tag text-meta-tag px-space-xs py-space-3xs rounded bg-primary/10 text-primary font-semibold">{{ article?.category?.name?.toUpperCase() }}</span>
                   <span class="inline-flex items-center gap-space-3xs font-meta-tag text-meta-tag px-space-xs py-space-3xs rounded-full bg-secondary-container/40 text-secondary">
-                    <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> EVERGREEN
+                    <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> {{ article?.status?.toUpperCase() }}
                   </span>
-                  <span class="font-meta-tag text-meta-tag text-tertiary hidden sm:inline">2024-04-18</span>
+                  <span class="font-meta-tag text-meta-tag text-tertiary hidden sm:inline">{{ article?.publishedAt }}</span>
                 </div>
                 <div class="flex items-center gap-space-xs font-meta-tag text-meta-tag text-tertiary">
-                  <span class="flex items-center gap-1"><Icon name="schedule" class="w-[1rem] h-[1rem]" /> 14 min read</span>
+                  <span class="flex items-center gap-1"><Icon name="schedule" class="w-[1rem] h-[1rem]" /> {{ article?.readingTime }} min read</span>
                 </div>
               </div>
               <div>
-                <h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors cursor-pointer">Deterministic Storage Engines: Zero-Allocation LSM-Trees over Memory-Mapped NVMe</h3>
-                <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-2xs line-clamp-2">Examining how custom ring-buffered compaction routines prevent kernel lock inversion under write amplification spikes.</p>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors cursor-pointer">{{ article?.title }}</h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant mt-space-2xs line-clamp-2">{{ article?.excerpt }}</p>
               </div>
               <div class="flex flex-wrap items-center justify-between pt-space-xs text-on-surface-variant">
                 <div class="flex items-center gap-space-xs">
                   <span class="font-meta-tag text-meta-tag text-tertiary">TAGS:</span>
-                  <span class="font-meta-tag text-meta-tag px-space-2xs py-space-3xs rounded bg-surface-container text-on-surface-variant">#allocator</span>
-                  <span class="font-meta-tag text-meta-tag px-space-2xs py-space-3xs rounded bg-surface-container text-on-surface-variant">#nvme</span>
+                  <span v-for="tag in article?.articleTags" :key="tag.tag.id" class="font-meta-tag text-meta-tag px-space-2xs py-space-3xs rounded bg-surface-container text-on-surface-variant">#{{ tag.tag.name }}</span>
                 </div>
-                <NuxtLink class="inline-flex items-center gap-space-2xs font-button-label text-button-label text-primary hover:text-primary-container transition-colors" to="/article/tech/deterministic-storage">
+                <NuxtLink class="inline-flex items-center gap-space-2xs font-button-label text-button-label text-primary hover:text-primary-container transition-colors" :to="`/article/${article.contentType}/${article.slug}`">
                   <span>Read Note</span>
                   <Icon name="arrow_forward" class="w-[1rem] h-[1rem]" />
                 </NuxtLink>

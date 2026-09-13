@@ -11,39 +11,28 @@
               <div class="flex items-center gap-space-xs flex-wrap">
                 <span class="inline-flex items-center gap-space-2xs px-space-xs py-space-3xs rounded-full bg-surface-container text-on-surface-variant font-meta-tag text-meta-tag shadow-sm">
                   <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
-                  <span>STATUS: PLANTING NEW ESSAYS IN MUNICH</span>
+                  <span>STATUS: WRITING ABOUT CODE & LIFE</span>
                 </span>
-                <span class="font-meta-tag text-meta-tag text-tertiary hidden sm:inline">•</span>
-                <span class="font-meta-tag text-meta-tag text-tertiary hidden sm:inline">LAT 48.1351° N, LON 11.5820° E</span>
               </div>
-              <h1 class="font-headline-lg text-headline-lg text-on-surface leading-tight">A digital garden tending to distributed systems, frontend craft, and the quiet art of building thoughtfully.</h1>
-              <p class="font-body-md text-body-md text-on-surface-variant">Here, writing is an iterative substrate. Notes sprout as seedlings, evolve through revision, and settle into evergreen architectural references.</p>
+              <h1 class="font-headline-lg text-headline-lg text-on-surface leading-tight">Where code meets reflection — a space for building things and writing about the process.</h1>
+              <p class="font-body-md text-body-md text-on-surface-variant">Technical notes on web development and AI tooling, alongside personal thoughts on the journey of building, learning, and creating along the way.</p>
             </div>
             <div class="bg-surface-container-lowest/80 backdrop-blur-sm rounded-lg p-space-md shadow-sm self-start lg:self-center shrink-0 w-full sm:w-auto">
               <div class="font-meta-tag text-meta-tag text-tertiary uppercase tracking-wider mb-space-xs flex items-center justify-between">
-                <span>Growth Taxonomy</span>
+                <span>What you'll find here</span>
                 <Icon name="eco" class="w-3.5 h-3.5" />
               </div>
               <div class="grid grid-cols-3 sm:flex sm:items-center gap-space-md">
                 <div class="flex items-center gap-space-2xs">
-                  <span class="text-[0.95rem]">🌰</span>
+                  <span class="text-[0.95rem]">&gt;_</span>
                   <div class="flex flex-col">
-                    <span class="font-button-label text-[0.75rem] leading-none text-on-surface">Seedling</span>
-                    <span class="font-meta-tag text-[0.65rem] text-tertiary">Fresh sprout</span>
+                    <span class="font-button-label text-[0.75rem] leading-none text-on-surface">Tech</span>
                   </div>
                 </div>
                 <div class="flex items-center gap-space-2xs">
-                  <span class="text-[0.95rem]">🌿</span>
+                  <span class="text-[0.95rem]">🖋</span>
                   <div class="flex flex-col">
-                    <span class="font-button-label text-[0.75rem] leading-none text-on-surface">Budding</span>
-                    <span class="font-meta-tag text-[0.65rem] text-primary">In development</span>
-                  </div>
-                </div>
-                <div class="flex items-center gap-space-2xs">
-                  <span class="text-[0.95rem]">🌳</span>
-                  <div class="flex flex-col">
-                    <span class="font-button-label text-[0.75rem] leading-none text-on-surface">Evergreen</span>
-                    <span class="font-meta-tag text-[0.65rem] text-secondary">Permanent</span>
+                    <span class="font-button-label text-[0.75rem] leading-none text-on-surface">Personal</span>
                   </div>
                 </div>
               </div>

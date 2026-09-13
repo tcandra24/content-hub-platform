@@ -24,13 +24,6 @@
           <NuxtLink to="/search" aria-label="Search notes" class="p-space-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded transition-colors">
             <Icon name="search" class="w-5 h-5" />
           </NuxtLink>
-          <a
-            href="#"
-            class="hidden sm:inline-flex items-center gap-space-2xs px-space-xs py-space-3xs font-meta-tag text-meta-tag text-secondary bg-secondary-container/40 border border-secondary/20 rounded hover:bg-secondary-container transition-colors"
-          >
-            <Icon name="rss_feed" class="w-3.5 h-3.5" />
-            <span>RSS</span>
-          </a>
           <NuxtLink
             to="/admin/login"
             class="inline-flex items-center gap-space-2xs px-space-sm py-space-xs font-button-label text-button-label text-tertiary hover:text-on-surface bg-surface-container border border-outline-variant/40 rounded hover:bg-surface-container-high transition-colors"
