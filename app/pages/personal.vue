@@ -1,3 +1,12 @@
+<script lang="ts" setup>
+const { formatMonthYear } = useDateFormat();
+const { data } = await useFetch("/api/articles", {
+  query: {
+    contentType: "personal",
+  },
+});
+</script>
+
 <template>
   <div class="flex flex-col w-full">
     <div class="relative w-full">
@@ -81,7 +90,7 @@
           </div>
 
           <div class="space-y-space-md">
-            <article class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all duration-300 flex flex-col md:flex-row gap-space-md group">
+            <article v-for="article in data?.articles" :key="article.id" class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all duration-300 flex flex-col md:flex-row gap-space-md group">
               <div class="w-full md:w-48 h-40 rounded-lg overflow-hidden shrink-0">
                 <img
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -92,18 +101,18 @@
               <div class="flex flex-col justify-between flex-1 space-y-space-xs">
                 <div class="space-y-space-2xs">
                   <div class="flex items-center gap-space-xs">
-                    <span class="font-meta-tag text-meta-tag px-space-xs py-space-3xs rounded bg-primary-fixed text-on-primary-fixed font-medium">STUDIO NOTES</span>
-                    <span class="font-meta-tag text-meta-tag text-tertiary">April 2024</span>
+                    <span class="font-meta-tag text-meta-tag px-space-xs py-space-3xs rounded bg-primary-fixed text-on-primary-fixed font-medium">{{ article.category?.name.toUpperCase() }}S</span>
+                    <span class="font-meta-tag text-meta-tag text-tertiary">{{ formatMonthYear(article?.publishedAt) }}</span>
                     <span class="inline-flex items-center gap-space-3xs font-meta-tag text-meta-tag px-space-xs py-space-3xs rounded-full bg-secondary-container/40 text-secondary">
-                      <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> EVERGREEN
+                      <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> {{ article?.status?.toUpperCase() }}
                     </span>
                   </div>
-                  <h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors cursor-pointer">The Tactility of Analog Constraint: Reflections from Thirty Rolls of Tri-X 400</h3>
-                  <p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">How intentionally limiting creative feedback loops changes our capacity to perceive subtle human moments.</p>
+                  <h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors cursor-pointer">{{ article?.title }}</h3>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">{{ article?.excerpt }}</p>
                 </div>
                 <div class="flex items-center justify-between pt-space-xs font-meta-tag text-meta-tag text-tertiary">
-                  <span class="flex items-center gap-1"><Icon name="menu_book" class="w-[1rem] h-[1rem]" /> 6 min essay</span>
-                  <NuxtLink to="/article/personal/analog-constraint" class="text-primary font-button-label text-button-label">Open Essay →</NuxtLink>
+                  <span class="flex items-center gap-1"><Icon name="menu_book" class="w-[1rem] h-[1rem]" /> {{ article?.readingTime }} min essay</span>
+                  <NuxtLink :to="`/article/${article.contentType}/${article.slug}`" class="text-primary font-button-label text-button-label">Open Essay →</NuxtLink>
                 </div>
               </div>
             </article>

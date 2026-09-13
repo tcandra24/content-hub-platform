@@ -4,11 +4,11 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  css: ["~/assets/css/main.css"],
+  css: ["~/assets/css/main.css", "highlight.js/styles/github-dark.css"],
 
   vite: {
     plugins: [tailwindcss()],
   },
 
-  modules: ["@nuxt/image", "@nuxt/fonts"],
+  modules: ["@nuxt/image", "@nuxt/fonts", "@vee-validate/nuxt"],
 });

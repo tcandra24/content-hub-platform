@@ -1,7 +1,4 @@
 <script lang="ts" setup>
-definePageMeta({
-  middleware: "auth",
-});
 const navNuxtLinks = ref([
   { path: "/admin", label: "Dashboard & Articles", icon: "dashboard" },
   { path: "/admin/editor", label: "New Post Editor", icon: "edit_note" },
@@ -10,9 +7,15 @@ const navNuxtLinks = ref([
 ]);
 
 const route = useRoute();
+const session = authClient.useSession();
 
 const isActive = (NuxtLink: { path: string }) => {
   return route.path === NuxtLink.path || (NuxtLink.path === "/articles" && route.path === "/");
+};
+
+const logout = async () => {
+  await authClient.signOut();
+  navigateTo("/admin/login");
 };
 </script>
 
@@ -54,12 +57,12 @@ const isActive = (NuxtLink: { path: string }) => {
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuANsUUSyBs7Cr_g4fCeUJ84X_9eoXBo59JVmyO5_yZcV2mtI_fR5n4YNdKflLFeIEPFRXbm4TSpvDnp2S8CZQGuvMYIGBN1wMdkl9JN7YYeejqeMfcONsgw0Nh2MqYd_c6lD9sZ3Om9M0wSoRzugirqyuWcJgai94dfvQjo41c-YVWVSLzJsD-kb_9kJSiEg8PQMDZ9J2qatfzI558Y5fpxCLsqsRIbiWxkD8X0Z-rnxwqN-cLTuy44"
           />
           <div className="flex flex-col min-w-0 flex-1">
-            <span className="font-body-sm text-body-sm font-semibold text-on-surface truncate">Lead Curator</span>
-            <span className="font-meta-tag text-meta-tag text-secondary truncate">admin@chronicle.io</span>
+            <span className="font-body-sm text-body-sm font-semibold text-on-surface truncate">{{ session.data?.user.name }}</span>
+            <span className="font-meta-tag text-meta-tag text-secondary truncate">{{ session.data?.user.email }}</span>
           </div>
-          <NuxtLink to="/" className="text-tertiary hover:text-error transition-colors" title="Sign out">
+          <button @click="logout" className="text-tertiary hover:text-error transition-colors" title="Sign out">
             <Icon name="logout" className="w-5 h-5" />
-          </NuxtLink>
+          </button>
         </div>
       </div>
     </aside>

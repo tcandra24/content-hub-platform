@@ -2,7 +2,34 @@
 definePageMeta({
   layout: false,
 });
+
+import { useForm } from "vee-validate";
+import { toTypedSchema } from "@vee-validate/zod";
+import { loginSchema } from "~/shared/schemas/auth";
 import { ref } from "vue";
+
+const { handleSubmit, errors, defineField, isSubmitting } = useForm({
+  validationSchema: toTypedSchema(loginSchema),
+});
+
+const [email, emailAttrs] = defineField("email");
+const [password, passwordAttrs] = defineField("password");
+
+const submitError = ref("");
+
+const onSubmit = handleSubmit(async (values) => {
+  const { data, error } = await authClient.signIn.email({
+    email: values.email,
+    password: values.password,
+  });
+
+  if (error) {
+    submitError.value = error.message || "Email or password is incorrect";
+    return;
+  }
+
+  navigateTo("/admin");
+});
 
 const authMode = ref<"credentials" | "magic">("credentials");
 
@@ -61,10 +88,10 @@ function setAuthMode(mode: "credentials" | "magic") {
           </button>
         </div>
 
-        <form v-if="authMode === 'credentials'" class="space-y-space-md" @submit.prevent="navigateTo('/admin')">
+        <form v-if="authMode === 'credentials'" class="space-y-space-md" @submit.prevent="onSubmit">
           <div class="space-y-space-2xs">
             <div class="flex items-center justify-between">
-              <label class="font-button-label text-button-label text-on-surface" htmlFor="admin-email">Curator Email</label>
+              <label class="font-button-label text-button-label text-on-surface" htmlFor="admin-email">Email</label>
               <span class="font-meta-tag text-meta-tag text-tertiary">AUTHOR / MAINTAINER</span>
             </div>
             <div class="relative">
@@ -73,9 +100,10 @@ function setAuthMode(mode: "credentials" | "magic") {
                 class="w-full pl-10 pr-space-md py-space-xs bg-surface-container-low text-on-surface placeholder:text-outline-variant font-body-sm text-body-sm rounded focus:bg-surface-container-lowest focus:outline-none transition-all"
                 id="admin-email"
                 placeholder="name@domain.garden"
-                required
+                v-model="email"
+                v-bind="emailAttrs"
                 type="email"
-                defaultValue="curator@chronicle-code.garden"
+                defaultValue=""
               />
             </div>
           </div>
@@ -89,9 +117,10 @@ function setAuthMode(mode: "credentials" | "magic") {
               <input
                 class="w-full pl-10 pr-10 py-space-xs bg-surface-container-low text-on-surface font-body-sm text-body-sm rounded focus:bg-surface-container-lowest focus:outline-none transition-all"
                 id="admin-password"
-                required
+                v-model="password"
+                v-bind="passwordAttrs"
                 type="password"
-                defaultValue="••••••••••••••••"
+                defaultValue=""
               />
               <button class="absolute right-space-sm top-1/2 -translate-y-1/2 text-tertiary hover:text-on-surface transition-colors" title="Reveal password" type="button">
                 <Icon name="visibility" class="w-5 h-5" />
@@ -99,22 +128,15 @@ function setAuthMode(mode: "credentials" | "magic") {
             </div>
           </div>
 
-          <div class="p-space-sm bg-surface-container-low rounded-lg flex items-center justify-between">
-            <div class="flex items-center gap-space-sm">
-              <div class="w-8 h-8 rounded bg-secondary-container/40 flex items-center justify-center text-secondary">
-                <Icon name="security_key" class="w-5 h-5" />
-              </div>
-              <div class="flex flex-col text-left">
-                <span class="font-body-sm text-body-sm font-semibold text-on-surface">Hardware Key (FIDO2)</span>
-                <span class="font-meta-tag text-meta-tag text-tertiary">YubiKey, Touch ID or WebAuthn</span>
-              </div>
-            </div>
-            <button class="px-space-sm py-space-3xs font-button-label text-button-label text-secondary bg-surface-container-lowest rounded shadow-sm hover:bg-secondary-container/30 transition-all" type="button">Assert</button>
-          </div>
+          <p v-if="submitError" class="text-red-500 text-sm">{{ submitError }}</p>
 
-          <button class="w-full flex items-center justify-center gap-space-xs py-space-sm px-space-md bg-primary text-on-primary font-button-label text-button-label rounded shadow-md hover:bg-primary-container transition-all" type="submit">
+          <button
+            :disabled="isSubmitting"
+            class="w-full flex items-center justify-center gap-space-xs py-space-sm px-space-md bg-primary text-on-primary font-button-label text-button-label rounded shadow-md hover:bg-primary-container transition-all"
+            type="submit"
+          >
             <Icon name="lock_open" class="w-5 h-5" />
-            <span>Authenticate to Studio</span>
+            <span> {{ isSubmitting ? "Authenticating..." : "Authenticate to Studio" }} </span>
           </button>
         </form>
         <form v-else class="space-y-space-md" @submit.prevent="console.log('submit')">

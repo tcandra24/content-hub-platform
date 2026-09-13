@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+const { formatMonthYear } = useDateFormat();
 const { data } = await useFetch("/api/articles", {
   query: {
     contentType: "tech",
@@ -96,7 +97,7 @@ const { data } = await useFetch("/api/articles", {
                   <span class="inline-flex items-center gap-space-3xs font-meta-tag text-meta-tag px-space-xs py-space-3xs rounded-full bg-secondary-container/40 text-secondary">
                     <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> {{ article?.status?.toUpperCase() }}
                   </span>
-                  <span class="font-meta-tag text-meta-tag text-tertiary hidden sm:inline">{{ article?.publishedAt }}</span>
+                  <span class="font-meta-tag text-meta-tag text-tertiary hidden sm:inline">{{ formatMonthYear(article?.publishedAt) }}</span>
                 </div>
                 <div class="flex items-center gap-space-xs font-meta-tag text-meta-tag text-tertiary">
                   <span class="flex items-center gap-1"><Icon name="schedule" class="w-[1rem] h-[1rem]" /> {{ article?.readingTime }} min read</span>

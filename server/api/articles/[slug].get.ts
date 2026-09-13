@@ -27,7 +27,11 @@ export default defineEventHandler(async (event) => {
       message: "Article found",
       article,
     };
-  } catch (error) {
+  } catch (error: any) {
+    if (error.statusCode) {
+      throw error;
+    }
+
     throw createError({
       statusCode: 500,
       message: "Internal Server Error",
