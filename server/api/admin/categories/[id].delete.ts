@@ -1,5 +1,5 @@
+import { categories } from "~~/server/db/schema";
 import { eq } from "drizzle-orm";
-import { articles } from "~~/server/db/schema";
 
 export default defineEventHandler(async (event) => {
   try {
@@ -12,21 +12,26 @@ export default defineEventHandler(async (event) => {
     //     message: 'Unauthorized'
     //    })
     // }
+
     const id = getRouterParam(event, "id");
 
-    const [existingArticle] = await db.select().from(articles).where(eq(articles.id, id!));
+    const [existingCategory] = await db.select().from(categories).where(eq(categories.id, id!));
 
-    if (!existingArticle) {
-      throw createError({ statusCode: 404, message: "Article not found" });
+    if (!existingCategory) {
+      throw createError({ statusCode: 404, message: "Category not found" });
     }
 
-    await db.delete(articles).where(eq(articles.id, id!));
+    await db.delete(categories).where(eq(categories.id, id!)).returning();
 
     return {
       success: true,
-      message: "Article deleted successfully",
+      message: "Category deleted successfully",
     };
-  } catch (error) {
+  } catch (error: any) {
+    if (error.statusCode) {
+      throw error;
+    }
+
     throw createError({
       statusCode: 500,
       message: "Internal Server Error",

@@ -3,6 +3,12 @@ definePageMeta({
   middleware: "auth",
   layout: "admin",
 });
+
+const { data } = await useFetch("/api/admin/articles", {
+  query: {
+    contentType: "tech",
+  },
+});
 </script>
 
 <template>
@@ -55,39 +61,38 @@ definePageMeta({
               </th>
               <th class="py-space-sm px-space-md font-medium">Title &amp; Reference Slug</th>
               <th class="py-space-sm px-space-md font-medium">Domain</th>
-              <th class="py-space-sm px-space-md font-medium">Growth Stage</th>
+              <th class="py-space-sm px-space-md font-medium">Category</th>
               <th class="py-space-sm px-space-md font-medium">Status</th>
             </tr>
           </thead>
           <tbody class="divide-y-0 text-on-surface">
-            <tr class="hover:bg-surface-container/60 transition-colors group">
+            <tr v-for="article in data?.articles" class="hover:bg-surface-container/60 transition-colors group">
               <td class="py-space-md px-space-md align-middle">
                 <input class="rounded border-outline-variant text-primary focus:ring-primary/30 h-4 w-4 bg-surface" type="checkbox" />
               </td>
               <td class="py-space-md px-space-md align-middle min-w-70">
                 <div class="flex items-center gap-space-sm">
                   <div class="flex flex-col min-w-0">
-                    <NuxtLink class="font-headline-sm text-headline-sm text-on-surface hover:text-primary transition-colors truncate" to="/admin/editor"> Deconstructing SSR Hydration in Nuxt 3 </NuxtLink>
-                    <span class="font-code-inline text-code-inline text-tertiary truncate">/dispatches/tech/nuxt-ssr-hydration-pipeline</span>
+                    <NuxtLink class="font-headline-sm text-headline-sm text-on-surface hover:text-primary transition-colors truncate" to="/admin/editor"> {{ article.title }} </NuxtLink>
+                    <span class="font-code-inline text-code-inline text-tertiary truncate">{{ `/article/${article?.contentType}/${article?.slug}` }}</span>
                   </div>
                 </div>
               </td>
               <td class="py-space-md px-space-md align-middle">
                 <span class="inline-flex items-center gap-space-2xs px-space-xs py-space-3xs rounded bg-secondary-fixed/40 text-on-secondary-fixed-variant font-meta-tag text-meta-tag">
                   <Icon name="terminal" class="w-3.5 h-3.5" />
-                  Tech
+                  {{ article?.contentType?.toUpperCase() }}
                 </span>
               </td>
               <td class="py-space-md px-space-md align-middle">
                 <span class="inline-flex items-center gap-space-2xs px-space-xs py-space-3xs rounded-full bg-surface-container font-meta-tag text-meta-tag text-on-surface-variant">
-                  <span>🌲</span>
-                  <span>Evergreen</span>
+                  {{ article?.category?.name?.toUpperCase() }}
                 </span>
               </td>
               <td class="py-space-md px-space-md align-middle">
                 <span class="inline-flex items-center gap-space-2xs px-space-xs py-space-3xs rounded bg-secondary-container/40 text-on-secondary-container font-button-label text-button-label">
                   <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
-                  Published
+                  {{ article?.status?.toUpperCase() }}
                 </span>
               </td>
             </tr>
