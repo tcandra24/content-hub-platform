@@ -1,14 +1,28 @@
 <script lang="ts" setup>
+import type ConfirmDialog from "~/components/ConfirmDialog.vue";
 definePageMeta({
   middleware: "auth",
   layout: "admin",
 });
 
-const { data } = await useFetch("/api/admin/articles", {
-  query: {
-    contentType: "tech",
-  },
-});
+const { data, refresh } = await useFetch("/api/admin/articles");
+const confirmDialog = ref<InstanceType<typeof ConfirmDialog>>();
+
+const handleDelete = async (id: string) => {
+  const { isCanceled } = await confirmDialog.value!.reveal();
+
+  if (isCanceled) return;
+
+  try {
+    await $fetch(`/api/admin/articles/${id}`, {
+      method: "DELETE",
+    });
+
+    refresh();
+  } catch (error) {
+    console.error("Failed to delete article:", error);
+  }
+};
 </script>
 
 <template>
@@ -98,10 +112,10 @@ const { data } = await useFetch("/api/admin/articles", {
               </td>
               <td class="py-space-md px-space-md align-middle text-right">
                 <div class="flex items-center justify-end gap-space-2xs opacity-0 group-hover:opacity-100 transition-opacity">
-                  <NuxtLink to="#" class="p-space-2xs text-on-surface-variant hover:text-primary hover:bg-surface-container rounded transition-colors" title="Edit Article">
+                  <NuxtLink :to="`/admin/editor/${article.id}`" class="p-space-2xs text-on-surface-variant hover:text-primary hover:bg-surface-container rounded transition-colors" title="Edit Article">
                     <Icon name="edit_note" class="w-5 h-5" />
                   </NuxtLink>
-                  <button class="p-space-2xs text-on-surface-variant hover:text-error hover:bg-error/10 rounded transition-colors" title="Delete Article" type="button">
+                  <button @click="handleDelete(article.id)" class="p-space-2xs text-on-surface-variant hover:text-error hover:bg-error/10 rounded transition-colors" title="Delete Article" type="button">
                     <Icon name="delete" class="w-5 h-5" />
                   </button>
                 </div>
@@ -109,6 +123,7 @@ const { data } = await useFetch("/api/admin/articles", {
             </tr>
           </tbody>
         </table>
+        <ConfirmDialog ref="confirmDialog" title="Delete Article" message="This action cannot be undone. Are you sure you want to proceed?" />
       </div>
     </div>
   </div>

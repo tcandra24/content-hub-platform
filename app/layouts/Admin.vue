@@ -3,8 +3,8 @@ const navNuxtLinks = ref([
   { path: "/admin", label: "Dashboard & Articles", icon: "dashboard" },
   { path: "/admin/editor", label: "New Post Editor", icon: "edit_note" },
   { path: "/admin/categories", label: "Categories", icon: "tags" },
-  { path: "#", label: "Media Library", icon: "perm_media" },
-  { path: "#", label: "System Settings", icon: "settings" },
+  // { path: "#", label: "Media Library", icon: "perm_media" },
+  // { path: "#", label: "System Settings", icon: "settings" },
 ]);
 
 const route = useRoute();

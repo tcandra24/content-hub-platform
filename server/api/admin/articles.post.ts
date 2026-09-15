@@ -1,6 +1,6 @@
-import { articles, articleTags } from "~~/server/db/schema";
+import { articles, articleTags, tags } from "~~/server/db/schema";
 import { articleSchema } from "~/shared/schemas/article";
-import { eq } from "drizzle-orm";
+import { eq, inArray } from "drizzle-orm";
 
 export default defineEventHandler(async (event) => {
   try {
@@ -25,7 +25,7 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    const { tagIds, ...articleData } = result.data;
+    const { tags: tagNames, ...articleData } = result.data;
 
     const existing = await db.select().from(articles).where(eq(articles.slug, articleData.slug));
 
@@ -40,14 +40,23 @@ export default defineEventHandler(async (event) => {
       .insert(articles)
       .values({
         ...articleData,
-        // userId: session.user.id,
-        userId: "75b4835e-4a1f-48b1-8d08-6f58ed40eb4a",
+        userId: session.user.id,
         publishedAt: articleData.status === "published" ? new Date() : null,
       })
       .returning();
 
-    if (tagIds.length > 0) {
-      await db.insert(articleTags).values(tagIds.map((tagId) => ({ articleId: newArticle.id, tagId })));
+    if (tagNames && tagNames.length > 0) {
+      // insert when not exist
+      await db
+        .insert(tags)
+        .values(tagNames.map((name) => ({ name, slug: generateSlug(name) })))
+        .onConflictDoNothing({ target: tags.slug });
+
+      // Check tags exist on table
+      const existingTags = await db.select().from(tags).where(inArray(tags.name, tagNames));
+
+      // insert articleTags
+      await db.insert(articleTags).values(existingTags.map((tag) => ({ articleId: newArticle.id, tagId: tag.id })));
     }
 
     return {
@@ -66,3 +75,11 @@ export default defineEventHandler(async (event) => {
     });
   }
 });
+
+const generateSlug = (text: string) => {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+};

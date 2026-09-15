@@ -15,7 +15,7 @@ export const articleSchema = z.object({
   readingTime: z.number().int().positive().optional(),
   seoTitle: z.string().max(255).optional(),
   seoDescription: z.string().max(300).optional(),
-  tagIds: z.array(z.string().uuid()).optional(),
+  tags: z.array(z.string().min(1)).optional(),
 });
 
 export type ArticleFormValues = z.infer<typeof articleSchema>;

@@ -108,6 +108,7 @@ const iconMap: Record<string, any> = {
   folder: Folder,
   tags: Tags,
   delete: Trash2,
+  x: X,
 };
 
 const props = defineProps<Props>();

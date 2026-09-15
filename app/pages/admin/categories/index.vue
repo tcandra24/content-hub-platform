@@ -10,9 +10,9 @@ const { data, refresh } = await useFetch("/api/admin/categories");
 const confirmDialog = ref<InstanceType<typeof ConfirmDialog>>();
 
 const handleDelete = async (id: string) => {
-  const { data: confirmed } = await confirmDialog.value!.reveal();
+  const { isCanceled } = await confirmDialog.value!.reveal();
 
-  if (!confirmed) return;
+  if (isCanceled) return;
 
   try {
     await $fetch(`/api/admin/categories/${id}`, {

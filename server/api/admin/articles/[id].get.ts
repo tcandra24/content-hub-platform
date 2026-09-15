@@ -1,13 +1,7 @@
-import { desc } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { articles } from "~~/server/db/schema";
 
 export default defineEventHandler(async (event) => {
-  // jika ada limit role admin saja yang diijinkan
-  // const session = await auth.api.getSession({ headers: event.headers })
-
-  // if (!session || session.user.role !== 'admin') {
-  //   throw createError({ statusCode: 403, message: 'Akses ditolak' })
-  // }
   try {
     const headers = event.headers;
     const session = await auth.api.getSession({ headers });
@@ -19,15 +13,17 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    const allArticles = await db.query.articles.findMany({
-      with: { author: true, category: true },
-      orderBy: desc(articles.createdAt),
+    const id = getRouterParam(event, "id");
+
+    const article = await db.query.articles.findFirst({
+      with: { author: true, category: true, articleTags: { with: { tag: true } } },
+      where: eq(articles.id, id!),
     });
 
     return {
       success: true,
-      message: "Articles retrieved successfully",
-      articles: allArticles,
+      message: "Article retrieved successfully",
+      article: article,
     };
   } catch (error: any) {
     if (error.statusCode) {
