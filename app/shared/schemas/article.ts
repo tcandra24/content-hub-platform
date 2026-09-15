@@ -11,11 +11,11 @@ export const articleSchema = z.object({
   excerpt: z.string().max(300).optional(),
   content: z.string().min(20, "Content is too short"),
   coverImage: z.string().url("Invalid cover image URL").optional().or(z.literal("")),
-  status: z.enum(["draft", "published"]).default("draft"),
+  status: z.enum(["draft", "published"]),
   readingTime: z.number().int().positive().optional(),
   seoTitle: z.string().max(255).optional(),
   seoDescription: z.string().max(300).optional(),
-  tagIds: z.array(z.string().uuid()).optional().default([]),
+  tagIds: z.array(z.string().uuid()).optional(),
 });
 
 export type ArticleFormValues = z.infer<typeof articleSchema>;

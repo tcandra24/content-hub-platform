@@ -7,7 +7,7 @@ export const categorySchema = z.object({
     .min(5)
     .max(100)
     .regex(/^[a-z0-9-]+$/, "Invalid slug format"),
-  contentType: z.enum(["tech", "personal"], { message: "Content type must be either tech or personal" }).default("tech"),
+  contentType: z.enum(["tech", "personal"], { message: "Content type must be either tech or personal" }),
 });
 
 export type CategoryFormValues = z.infer<typeof categorySchema>;

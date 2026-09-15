@@ -46,6 +46,9 @@ import {
   TrendingUp,
   Leaf,
   Users,
+  Trash2,
+  Tags,
+  Folder,
 } from "@lucide/vue";
 
 interface Props {
@@ -102,6 +105,9 @@ const iconMap: Record<string, any> = {
   chevron_right: ChevronRight,
   west: ArrowLeft,
   east: ArrowRight,
+  folder: Folder,
+  tags: Tags,
+  delete: Trash2,
 };
 
 const props = defineProps<Props>();

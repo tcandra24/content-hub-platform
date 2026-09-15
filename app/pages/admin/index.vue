@@ -63,6 +63,7 @@ const { data } = await useFetch("/api/admin/articles", {
               <th class="py-space-sm px-space-md font-medium">Domain</th>
               <th class="py-space-sm px-space-md font-medium">Category</th>
               <th class="py-space-sm px-space-md font-medium">Status</th>
+              <th class="py-space-sm px-space-md font-medium text-right">Actions</th>
             </tr>
           </thead>
           <tbody class="divide-y-0 text-on-surface">
@@ -94,6 +95,16 @@ const { data } = await useFetch("/api/admin/articles", {
                   <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
                   {{ article?.status?.toUpperCase() }}
                 </span>
+              </td>
+              <td class="py-space-md px-space-md align-middle text-right">
+                <div class="flex items-center justify-end gap-space-2xs opacity-0 group-hover:opacity-100 transition-opacity">
+                  <NuxtLink to="#" class="p-space-2xs text-on-surface-variant hover:text-primary hover:bg-surface-container rounded transition-colors" title="Edit Article">
+                    <Icon name="edit_note" class="w-5 h-5" />
+                  </NuxtLink>
+                  <button class="p-space-2xs text-on-surface-variant hover:text-error hover:bg-error/10 rounded transition-colors" title="Delete Article" type="button">
+                    <Icon name="delete" class="w-5 h-5" />
+                  </button>
+                </div>
               </td>
             </tr>
           </tbody>

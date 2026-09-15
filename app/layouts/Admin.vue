@@ -2,6 +2,7 @@
 const navNuxtLinks = ref([
   { path: "/admin", label: "Dashboard & Articles", icon: "dashboard" },
   { path: "/admin/editor", label: "New Post Editor", icon: "edit_note" },
+  { path: "/admin/categories", label: "Categories", icon: "tags" },
   { path: "#", label: "Media Library", icon: "perm_media" },
   { path: "#", label: "System Settings", icon: "settings" },
 ]);
@@ -44,6 +45,7 @@ const logout = async () => {
               :class="[isActive(link) ? 'bg-surface-container-highest text-primary font-semibold' : 'text-on-surface-variant hover:bg-surface-container hover:text-on-surface']"
               class="flex items-center gap-space-sm px-space-sm py-space-xs rounded transition-colors font-body-sm text-body-sm"
             >
+              <Icon :name="link.icon" className="w-5 h-5" />
               {{ link.label }}
             </NuxtLink>
           </nav>
