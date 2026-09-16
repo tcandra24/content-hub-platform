@@ -111,6 +111,7 @@ const iconMap: Record<string, any> = {
   x: X,
 };
 
+// props
 const props = defineProps<Props>();
 const iconComponent = computed(() => iconMap[props.name] || Star);
 </script>
