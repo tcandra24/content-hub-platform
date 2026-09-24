@@ -45,7 +45,7 @@ function setAuthMode(mode: "credentials" | "magic") {
 
       <div class="relative bg-surface-container-lowest shadow-xl rounded-xl p-space-xl sm:p-space-2xl flex flex-col space-y-space-lg">
         <div class="flex items-center justify-between">
-          <NuxtLink to="/" class="group inline-flex items-center gap-space-2xs text-tertiary hover:text-primary transition-colors font-button-label text-button-label">
+          <NuxtLink alt="Chronicle & Code" to="/" class="group inline-flex items-center gap-space-2xs text-tertiary hover:text-primary transition-colors font-button-label text-button-label">
             <Icon name="west" class="w-4.5 h-4.5 transition-transform group-hover:-translate-x-0.5" />
             <span>Return to Public Garden</span>
           </NuxtLink>
@@ -57,11 +57,7 @@ function setAuthMode(mode: "credentials" | "magic") {
 
         <div class="flex flex-col items-center text-center space-y-space-xs pt-space-xs">
           <div class="w-16 h-16 rounded-xl bg-surface-container-low p-space-xs flex items-center justify-center shadow-sm">
-            <NuxtImg
-              alt="Atelier Garden Logo"
-              class="w-full h-full object-contain"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRMXroZIvYWvsJaXaa8ttDSPvk3qeGq6TprkDYInV7GPxiWD8UlH3DTZvLFIvIcI9c6lqE3lLeB0zjFoL0WV0iOl4ZYZ7IsBVm8_C83ZazsjrFoCFiXc2dhjF_gDW6AV-cojIvirDchm-BApid_sxQoXcmqAZtCMO-8G9ZpPSmgaEnq-bY0KDrNSTgsIbrvwL8ud87Y2r70Xi3rlZzfuWeBRDHx7X9ysobza8ZxyufBuNBacxTIKhp"
-            />
+            <NuxtImg alt="Atelier Garden Logo" class="w-full h-full object-contain" src="/logo.png" />
           </div>
           <div class="space-y-space-3xs">
             <h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Chronicle &amp; Code Studio</h1>

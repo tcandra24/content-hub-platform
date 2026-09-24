@@ -25,11 +25,7 @@ const logout = async () => {
     <aside className="fixed left-0 top-0 h-full w-64 bg-surface-container-low border-r border-outline-variant/30 z-50 flex flex-col justify-between">
       <div className="flex flex-col">
         <div className="h-16 px-space-lg flex items-center gap-space-sm border-b border-outline-variant/30">
-          <NuxtImg
-            alt="Atelier Garden Logo"
-            className="h-7 w-auto object-contain"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRMXroZIvYWvsJaXaa8ttDSPvk3qeGq6TprkDYInV7GPxiWD8UlH3DTZvLFIvIcI9c6lqE3lLeB0zjFoL0WV0iOl4ZYZ7IsBVm8_C83ZazsjrFoCFiXc2dhjF_gDW6AV-cojIvirDchm-BApid_sxQoXcmqAZtCMO-8G9ZpPSmgaEnq-bY0KDrNSTgsIbrvwL8ud87Y2r70Xi3rlZzfuWeBRDHx7X9ysobza8ZxyufBuNBacxTIKhp"
-          />
+          <NuxtImg alt="Chronicle & Code" className="h-7 w-auto object-contain" src="/logo.png" />
           <div className="flex flex-col">
             <span className="font-headline-sm text-[1.125rem] text-on-surface leading-none">Studio CMS</span>
             <span className="font-meta-tag text-meta-tag text-tertiary">WORKSPACE v2.4</span>

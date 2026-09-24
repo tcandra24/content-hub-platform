@@ -3,11 +3,7 @@
     <header class="fixed top-0 w-full z-50 bg-background/90 backdrop-blur-md border-b border-outline-variant/30">
       <div class="h-16 max-w-content-measure-wide mx-auto px-space-lg flex items-center justify-between gap-space-md">
         <NuxtLink to="/" class="flex items-center gap-space-sm">
-          <NuxtImg
-            alt="Atelier Garden Logo"
-            class="h-8 w-auto object-contain"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRMXroZIvYWvsJaXaa8ttDSPvk3qeGq6TprkDYInV7GPxiWD8UlH3DTZvLFIvIcI9c6lqE3lLeB0zjFoL0WV0iOl4ZYZ7IsBVm8_C83ZazsjrFoCFiXc2dhjF_gDW6AV-cojIvirDchm-BApid_sxQoXcmqAZtCMO-8G9ZpPSmgaEnq-bY0KDrNSTgsIbrvwL8ud87Y2r70Xi3rlZzfuWeBRDHx7X9ysobza8ZxyufBuNBacxTIKhp"
-          />
+          <NuxtImg alt="Chronicle & Code" class="h-8 w-auto object-contain" src="/logo.png" />
           <div class="flex flex-col">
             <span class="font-headline-sm text-headline-sm text-on-surface tracking-tight leading-none">Chronicle &amp; Code</span>
             <span class="font-meta-tag text-meta-tag text-tertiary hidden sm:inline tracking-wider">A DEVELOPER'S DIGITAL GARDEN</span>
