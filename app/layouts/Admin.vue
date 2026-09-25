@@ -8,15 +8,21 @@ const navNuxtLinks = ref([
 ]);
 
 const route = useRoute();
-const session = authClient.useSession();
+const { session, authClient, fetchSession } = useAuth();
 
 const isActive = (NuxtLink: { path: string }) => {
   return route.path === NuxtLink.path || (NuxtLink.path === "/articles" && route.path === "/");
 };
 
 const logout = async () => {
-  await authClient.signOut();
-  navigateTo("/admin/login");
+  await authClient.signOut({
+    fetchOptions: {
+      onSuccess: async () => {
+        await fetchSession();
+        navigateTo("/admin/login");
+      },
+    },
+  });
 };
 </script>
 
@@ -49,14 +55,10 @@ const logout = async () => {
       </div>
       <div className="p-space-md border-t border-outline-variant/30 bg-surface-container/50">
         <div className="flex items-center gap-space-sm">
-          <NuxtImg
-            alt="Profile"
-            className="w-9 h-9 rounded-full object-cover border border-outline-variant/40"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuANsUUSyBs7Cr_g4fCeUJ84X_9eoXBo59JVmyO5_yZcV2mtI_fR5n4YNdKflLFeIEPFRXbm4TSpvDnp2S8CZQGuvMYIGBN1wMdkl9JN7YYeejqeMfcONsgw0Nh2MqYd_c6lD9sZ3Om9M0wSoRzugirqyuWcJgai94dfvQjo41c-YVWVSLzJsD-kb_9kJSiEg8PQMDZ9J2qatfzI558Y5fpxCLsqsRIbiWxkD8X0Z-rnxwqN-cLTuy44"
-          />
+          <NuxtImg alt="Profile" className="w-9 h-9 rounded-full object-cover border border-outline-variant/40" :src="`https://ui-avatars.com/api/?name=${session.user.name}&background=random&color=ffffff&size=100`" />
           <div className="flex flex-col min-w-0 flex-1">
-            <span className="font-body-sm text-body-sm font-semibold text-on-surface truncate">{{ session.data?.user.name }}</span>
-            <span className="font-meta-tag text-meta-tag text-secondary truncate">{{ session.data?.user.email }}</span>
+            <span className="font-body-sm text-body-sm font-semibold text-on-surface truncate">{{ session.user.name }}</span>
+            <span className="font-meta-tag text-meta-tag text-secondary truncate">{{ session.user.email }}</span>
           </div>
           <button @click="logout" className="text-tertiary hover:text-error transition-colors" title="Sign out">
             <Icon name="logout" className="w-5 h-5" />
@@ -86,11 +88,7 @@ const logout = async () => {
             <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-primary rounded-full"></span>
           </button>
           <div className="flex items-center gap-space-xs pl-space-xs">
-            <NuxtImg
-              alt="Profile"
-              className="w-8 h-8 rounded-full object-cover border border-outline-variant/40"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuANsUUSyBs7Cr_g4fCeUJ84X_9eoXBo59JVmyO5_yZcV2mtI_fR5n4YNdKflLFeIEPFRXbm4TSpvDnp2S8CZQGuvMYIGBN1wMdkl9JN7YYeejqeMfcONsgw0Nh2MqYd_c6lD9sZ3Om9M0wSoRzugirqyuWcJgai94dfvQjo41c-YVWVSLzJsD-kb_9kJSiEg8PQMDZ9J2qatfzI558Y5fpxCLsqsRIbiWxkD8X0Z-rnxwqN-cLTuy44"
-            />
+            <NuxtImg alt="Profile" className="w-8 h-8 rounded-full object-cover border border-outline-variant/40" :src="`https://ui-avatars.com/api/?name=${session.user.name}&background=random&color=ffffff&size=100`" />
           </div>
         </div>
       </header>

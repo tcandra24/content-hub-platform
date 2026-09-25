@@ -14,21 +14,28 @@ const { handleSubmit, errors, defineField, isSubmitting } = useForm({
 
 const [email, emailAttrs] = defineField("email");
 const [password, passwordAttrs] = defineField("password");
+const { authClient, fetchSession } = useAuth();
 
 const submitError = ref("");
 
 const onSubmit = handleSubmit(async (values) => {
-  const { data, error } = await authClient.signIn.email({
-    email: values.email,
-    password: values.password,
-  });
+  submitError.value = "";
 
-  if (error) {
-    submitError.value = error.message || "Email or password is incorrect";
-    return;
-  }
-
-  navigateTo("/admin");
+  await authClient.signIn.email(
+    {
+      email: values.email,
+      password: values.password,
+    },
+    {
+      onSuccess: async () => {
+        await fetchSession(); // ← ini kuncinya — sinkronkan state global
+        navigateTo("/admin");
+      },
+      onError: async (error) => {
+        submitError.value = error.message || "Email or password is incorrect";
+      },
+    },
+  );
 });
 
 const authMode = ref<"credentials" | "magic">("credentials");

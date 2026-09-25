@@ -7,7 +7,8 @@ const navLinks = ref([
 ]);
 
 const route = useRoute();
-// const session = authClient.useSession(useFetch);
+
+const { session } = useAuth();
 
 const isActive = (link: { path: string }) => {
   return route.path === link.path || (link.path === "/articles" && route.path === "/");
@@ -36,20 +37,16 @@ const isActive = (link: { path: string }) => {
           <NuxtLink to="/search" aria-label="Search notes" class="p-space-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded transition-colors">
             <Icon name="search" class="w-5 h-5" />
           </NuxtLink>
-          <!-- <template v-if="session?.data?.user"> -->
-          <NuxtLink
-            to="/admin"
-            class="inline-flex items-center gap-space-2xs px-space-sm py-space-xs font-button-label text-button-label text-tertiary hover:text-on-surface bg-surface-container border border-outline-variant/40 rounded hover:bg-surface-container-high transition-colors"
-          >
-            <Icon name="tune" class="w-[1rem] h-[1rem]" />
-            <span class="hidden md:inline">CMS Studio</span>
-          </NuxtLink>
-          <NuxtImg
-            alt="Profile"
-            class="w-8 h-8 rounded-full object-cover border border-outline-variant/40"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuANsUUSyBs7Cr_g4fCeUJ84X_9eoXBo59JVmyO5_yZcV2mtI_fR5n4YNdKflLFeIEPFRXbm4TSpvDnp2S8CZQGuvMYIGBN1wMdkl9JN7YYeejqeMfcONsgw0Nh2MqYd_c6lD9sZ3Om9M0wSoRzugirqyuWcJgai94dfvQjo41c-YVWVSLzJsD-kb_9kJSiEg8PQMDZ9J2qatfzI558Y5fpxCLsqsRIbiWxkD8X0Z-rnxwqN-cLTuy44"
-          />
-          <!-- </template>
+          <template v-if="session?.user">
+            <NuxtLink
+              to="/admin"
+              class="inline-flex items-center gap-space-2xs px-space-sm py-space-xs font-button-label text-button-label text-tertiary hover:text-on-surface bg-surface-container border border-outline-variant/40 rounded hover:bg-surface-container-high transition-colors"
+            >
+              <Icon name="tune" class="w-[1rem] h-[1rem]" />
+              <span class="hidden md:inline">CMS Studio</span>
+            </NuxtLink>
+            <NuxtImg alt="Profile" class="w-8 h-8 rounded-full object-cover border border-outline-variant/40" :src="`https://ui-avatars.com/api/?name=${session.user.name}&background=random&color=ffffff&size=100`" />
+          </template>
           <template v-else>
             <NuxtLink
               to="/admin/login"
@@ -58,7 +55,7 @@ const isActive = (link: { path: string }) => {
               <Icon name="sign_in" class="w-[1rem] h-[1rem]" />
               <span class="hidden md:inline">Sign In</span>
             </NuxtLink>
-          </template> -->
+          </template>
         </div>
       </div>
     </header>
