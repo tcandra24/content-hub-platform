@@ -49,6 +49,7 @@ import {
   Trash2,
   Tags,
   Folder,
+  LogIn,
 } from "@lucide/vue";
 
 interface Props {
@@ -109,6 +110,7 @@ const iconMap: Record<string, any> = {
   tags: Tags,
   delete: Trash2,
   x: X,
+  sign_in: LogIn,
 };
 
 // props

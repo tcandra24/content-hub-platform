@@ -1,3 +1,19 @@
+<script lang="ts" setup>
+const navLinks = ref([
+  { path: "/", label: "Articles" },
+  { path: "/tech", label: "Tech" },
+  { path: "/personal", label: "Personal" },
+  { path: "/about", label: "About & Projects" },
+]);
+
+const route = useRoute();
+// const session = authClient.useSession(useFetch);
+
+const isActive = (link: { path: string }) => {
+  return route.path === link.path || (link.path === "/articles" && route.path === "/");
+};
+</script>
+
 <template>
   <div class="bg-background font-body-md text-on-surface antialiased min-h-screen flex flex-col selection:bg-primary-fixed selection:text-on-primary-fixed">
     <header class="fixed top-0 w-full z-50 bg-background/90 backdrop-blur-md border-b border-outline-variant/30">
@@ -20,8 +36,9 @@
           <NuxtLink to="/search" aria-label="Search notes" class="p-space-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded transition-colors">
             <Icon name="search" class="w-5 h-5" />
           </NuxtLink>
+          <!-- <template v-if="session?.data?.user"> -->
           <NuxtLink
-            to="/admin/login"
+            to="/admin"
             class="inline-flex items-center gap-space-2xs px-space-sm py-space-xs font-button-label text-button-label text-tertiary hover:text-on-surface bg-surface-container border border-outline-variant/40 rounded hover:bg-surface-container-high transition-colors"
           >
             <Icon name="tune" class="w-[1rem] h-[1rem]" />
@@ -32,6 +49,16 @@
             class="w-8 h-8 rounded-full object-cover border border-outline-variant/40"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuANsUUSyBs7Cr_g4fCeUJ84X_9eoXBo59JVmyO5_yZcV2mtI_fR5n4YNdKflLFeIEPFRXbm4TSpvDnp2S8CZQGuvMYIGBN1wMdkl9JN7YYeejqeMfcONsgw0Nh2MqYd_c6lD9sZ3Om9M0wSoRzugirqyuWcJgai94dfvQjo41c-YVWVSLzJsD-kb_9kJSiEg8PQMDZ9J2qatfzI558Y5fpxCLsqsRIbiWxkD8X0Z-rnxwqN-cLTuy44"
           />
+          <!-- </template>
+          <template v-else>
+            <NuxtLink
+              to="/admin/login"
+              class="inline-flex items-center gap-space-2xs px-space-sm py-space-xs font-button-label text-button-label text-tertiary hover:text-on-surface bg-surface-container border border-outline-variant/40 rounded hover:bg-surface-container-high transition-colors"
+            >
+              <Icon name="sign_in" class="w-[1rem] h-[1rem]" />
+              <span class="hidden md:inline">Sign In</span>
+            </NuxtLink>
+          </template> -->
         </div>
       </div>
     </header>
@@ -90,18 +117,3 @@
     </footer>
   </div>
 </template>
-
-<script lang="ts" setup>
-const navLinks = ref([
-  { path: "/", label: "Articles" },
-  { path: "/tech", label: "Tech" },
-  { path: "/personal", label: "Personal" },
-  { path: "/about", label: "About & Projects" },
-]);
-
-const route = useRoute();
-
-const isActive = (link: { path: string }) => {
-  return route.path === link.path || (link.path === "/articles" && route.path === "/");
-};
-</script>
