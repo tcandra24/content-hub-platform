@@ -60,31 +60,8 @@ onUnmounted(() => window.removeEventListener("scroll", handleScroll));
           </p>
 
           <div class="space-y-space-lg mt-space-md">
-            <!-- <p class="font-headline-sm text-headline-sm text-on-surface leading-relaxed italic first-letter:text-primary first-letter:font-headline-lg first-letter:text-4xl first-letter:mr-2 first-letter:float-left first-letter:font-normal">
-              Every client-side JavaScript framework must eventually reckon with the immutable physics of the main thread. We preach the gospel of sub-second Time-to-First-Byte, yet we often dump Megabytes of serialised state into the DOM before
-              expecting mobile viewports to silently digest it without dropping frames.
-            </p> -->
-
             <section class="pt-space-lg space-y-space-sm scroll-mt-24" id="hydration-tax">
               <div v-html="renderedContent"></div>
-              <!-- <h2 class="font-headline-md text-headline-md text-on-surface">1. The Hydration Tax</h2>
-              <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-                When inspecting performance telemetry, the Hydration Tax surfaces as an extended Total Blocking Time (TBT). Between the moment the user views rendered text and the moment handlers actively bind, your interface is functionally
-                decorative—a deceptive phantom state.
-              </p>
-              <div class="p-space-md bg-surface-container-low rounded-lg space-y-space-2xs">
-                <div class="font-button-label text-button-label text-primary flex items-center gap-1.5">
-                  <Icon name="monitoring" class="w-4.5 h-4.5" />
-                  The Three Inefficiencies of Full Tree Hydration
-                </div>
-                <ul class="font-body-sm text-body-sm text-on-surface-variant space-y-space-2xs pl-space-md list-disc marker:text-primary">
-                  <li>
-                    <strong>Duplicate Data Transfer:</strong> JSON payloads embedded in <code class="font-code-inline text-code-inline px-1 py-0.5 rounded bg-surface-container-high text-primary">&lt;script id="__NUXT_DATA__"&gt;</code> replicate
-                    markup already sent over wire.
-                  </li>
-                  <li><strong>Eager Listener Attachment:</strong> Offscreen accordions, closed modals, and dormant analytics widgets execute instantaneously on boot.</li>
-                </ul>
-              </div> -->
             </section>
           </div>
         </article>

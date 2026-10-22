@@ -34,7 +34,7 @@ const logout = async () => {
           <NuxtImg alt="Chronicle & Code" className="h-7 w-auto object-contain" src="/logo.png" />
           <div className="flex flex-col">
             <span className="font-headline-sm text-[1.125rem] text-on-surface leading-none">Studio CMS</span>
-            <span className="font-meta-tag text-meta-tag text-tertiary">WORKSPACE v2.4</span>
+            <span className="font-meta-tag text-meta-tag text-tertiary">WORKSPACE v1.0</span>
           </div>
         </div>
         <div className="px-space-md py-space-sm">
@@ -57,7 +57,7 @@ const logout = async () => {
         <div className="flex items-center gap-space-sm">
           <NuxtImg alt="Profile" className="w-9 h-9 rounded-full object-cover border border-outline-variant/40" :src="`https://ui-avatars.com/api/?name=${session.user.name}&background=random&color=ffffff&size=100`" />
           <div className="flex flex-col min-w-0 flex-1">
-            <span className="font-body-sm text-body-sm font-semibold text-on-surface truncate">{{ session.user.name }}</span>
+            <span className="font-body-sm text-body-sm font-semibold text-on-surface truncate">{{ session.user.name.toUpperCase() }}</span>
             <span className="font-meta-tag text-meta-tag text-secondary truncate">{{ session.user.email }}</span>
           </div>
           <button @click="logout" className="text-tertiary hover:text-error transition-colors" title="Sign out">
@@ -70,7 +70,9 @@ const logout = async () => {
     <div className="pl-64 flex flex-col min-h-screen">
       <header className="fixed top-0 left-64 right-0 h-16 bg-surface/90 backdrop-blur-md border-b border-outline-variant/30 z-40 px-space-lg flex items-center justify-between">
         <div className="flex items-center gap-space-sm">
-          <span className="inline-flex items-center gap-space-2xs px-space-xs py-space-3xs font-meta-tag text-meta-tag text-primary bg-primary-fixed/40 border border-primary/20 rounded font-semibold tracking-wider">ADMIN ENCLAVE</span>
+          <span className="inline-flex items-center gap-space-2xs px-space-xs py-space-3xs font-meta-tag text-meta-tag text-primary bg-primary-fixed/40 border border-primary/20 rounded font-semibold tracking-wider">{{
+            session.user.name.toUpperCase()
+          }}</span>
           <span className="text-outline-variant/60">/</span>
           <span className="font-meta-tag text-meta-tag text-tertiary hidden sm:inline">DIGITAL GARDEN ENGINE</span>
         </div>
@@ -83,10 +85,6 @@ const logout = async () => {
             <span>Live Garden</span>
           </NuxtLink>
           <div className="h-5 w-px bg-outline-variant/40"></div>
-          <button aria-label="Notifications" className="relative p-space-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded transition-colors" type="button">
-            <Icon name="notifications" className="w-5 h-5" />
-            <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-primary rounded-full"></span>
-          </button>
           <div className="flex items-center gap-space-xs pl-space-xs">
             <NuxtImg alt="Profile" className="w-8 h-8 rounded-full object-cover border border-outline-variant/40" :src="`https://ui-avatars.com/api/?name=${session.user.name}&background=random&color=ffffff&size=100`" />
           </div>

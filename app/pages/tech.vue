@@ -28,7 +28,7 @@ const { data } = await useFetch("/api/articles", {
           <button class="relative flex items-center gap-space-xs px-space-md py-space-xs rounded-full font-button-label text-button-label transition-all duration-200 shadow-sm bg-surface-container-lowest text-primary">
             <Icon name="terminal" class="w-[1rem] h-[1rem]" />
             <span>Tech Hub</span>
-            <span class="ml-space-3xs font-meta-tag text-meta-tag px-space-2xs py-0.5 rounded-full bg-primary/10 text-primary">28</span>
+            <span class="ml-space-3xs font-meta-tag text-meta-tag px-space-2xs py-0.5 rounded-full bg-primary/10 text-primary">{{ data?.articles.length }}</span>
           </button>
         </div>
       </div>
@@ -90,7 +90,23 @@ const { data } = await useFetch("/api/articles", {
           </div>
 
           <div class="space-y-space-md">
-            <article v-for="article in data.articles" :key="article?.id" class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all duration-300 flex flex-col space-y-space-sm group">
+            <div v-if="data?.articles.length === 0" class="py-space-2xl px-space-lg text-center flex flex-col items-center justify-center w-full mx-auto bg-surface-container-low/70 rounded-2xl border border-outline-variant/30 shadow-sm">
+              <div class="w-16 h-16 rounded-2xl bg-surface-container-highest/70 flex items-center justify-center text-primary border border-outline-variant/30 mb-space-md shadow-inner">
+                <Icon name="terminal" class="w-8 h-8 opacity-75" />
+              </div>
+
+              <span class="inline-flex items-center gap-space-2xs px-space-xs py-space-3xs rounded-full bg-surface-container font-meta-tag text-meta-tag text-tertiary mb-space-xs">
+                <span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+                Empty Repository
+              </span>
+
+              <h3 class="font-headline-md text-headline-md text-on-surface tracking-tight mb-space-2xs">No Technical Records Yet</h3>
+
+              <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed mb-space-lg">
+                The technical and system architecture repository does not yet have any published entries. Start writing a new article via the Admin Studio or explore the Personal Garden domain.
+              </p>
+            </div>
+            <article v-else v-for="article in data?.articles" :key="article?.id" class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all duration-300 flex flex-col space-y-space-sm group">
               <div class="flex flex-wrap items-center justify-between gap-space-xs">
                 <div class="flex items-center gap-space-xs">
                   <span class="font-meta-tag text-meta-tag px-space-xs py-space-3xs rounded bg-primary/10 text-primary font-semibold">{{ article?.category?.name?.toUpperCase() }}</span>

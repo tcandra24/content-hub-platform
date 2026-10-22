@@ -125,8 +125,11 @@ function handlePublish() {
           <Icon name="ArrowLeft" class="w-5 h-5" />
           <span class="hidden sm:inline">Articles</span>
         </NuxtLink>
-        <span class="inline-flex items-center gap-space-2xs px-space-xs py-space-3xs rounded bg-secondary-container/40 text-on-secondary-container font-button-label text-button-label">
-          <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+        <span
+          class="inline-flex items-center gap-space-2xs px-space-xs py-space-3xs rounded font-button-label text-button-label"
+          :class="[d?.article?.status === 'published' ? 'bg-secondary-container/40 text-on-secondary-container' : 'bg-gray-500/20 text-gray-500']"
+        >
+          <span class="w-1.5 h-1.5 rounded-full" :class="[d?.article?.status === 'published' ? 'bg-secondary' : 'bg-gray-400']"></span>
           {{ d?.article?.status?.toUpperCase() }}
         </span>
       </div>

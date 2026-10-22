@@ -47,7 +47,31 @@ const handleDelete = async (id: string) => {
     </div>
 
     <div class="bg-surface-container-low rounded shadow-sm overflow-hidden mb-space-md">
-      <div class="overflow-x-auto">
+      <div v-if="data?.categories.length === 0" class="py-space-2xl px-space-lg text-center flex flex-col items-center justify-center max-w-lg mx-auto">
+        <div class="w-16 h-16 rounded-2xl bg-surface-container-highest/70 flex items-center justify-center text-primary border border-outline-variant/30 mb-space-md shadow-inner">
+          <Icon name="folder_plus" class="w-8 h-8 opacity-70" />
+        </div>
+
+        <span class="inline-flex items-center gap-space-2xs px-space-xs py-space-3xs rounded-full bg-surface-container font-meta-tag text-meta-tag text-tertiary mb-space-xs">
+          <span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+          Empty Taxonomy
+        </span>
+
+        <h3 class="font-headline-md text-headline-md text-on-surface tracking-tight mb-space-2xs">No Category Yet</h3>
+
+        <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed mb-space-lg">Categories group your posts based on their subject matter. Create your first category to begin structuring your article taxonomy.</p>
+
+        <div class="flex flex-col sm:flex-row items-center gap-space-sm w-full justify-center">
+          <NuxtLink
+            to="/admin/categories/new"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-space-2xs px-space-md py-space-xs rounded bg-primary text-on-primary font-button-label text-button-label hover:bg-primary-container shadow-sm transition-all"
+          >
+            <Icon name="tags" class="w-[1.125rem] h-[1.125rem]" />
+            <span>+ Create First Category</span>
+          </NuxtLink>
+        </div>
+      </div>
+      <div v-else class="overflow-x-auto">
         <table class="w-full text-left border-collapse">
           <thead>
             <tr class="bg-surface-container text-tertiary font-meta-tag text-meta-tag uppercase tracking-wider">
@@ -58,10 +82,7 @@ const handleDelete = async (id: string) => {
             </tr>
           </thead>
           <tbody class="divide-y divide-outline-variant/20 text-on-surface">
-            <tr v-if="data?.categories.length === 0">
-              <td colSpan="{4}" class="py-space-xl px-space-md text-center text-tertiary font-body-sm text-body-sm">No categories found. Create one to get started.</td>
-            </tr>
-            <tr v-else v-for="category in data?.categories" :key="category.id" class="hover:bg-surface-container/60 transition-colors group">
+            <tr v-for="category in data?.categories" :key="category.id" class="hover:bg-surface-container/60 transition-colors group">
               <td class="py-space-md px-space-md align-middle">
                 <div class="flex items-center gap-space-sm">
                   <div class="w-8 h-8 rounded bg-secondary-container/30 flex items-center justify-center text-secondary">

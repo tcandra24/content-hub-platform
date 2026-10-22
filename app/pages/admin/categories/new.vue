@@ -105,11 +105,11 @@ watch(name, (newName) => {
         </div>
 
         <div class="pt-space-md flex gap-space-sm border-t border-outline-variant/30">
-          <button type="button" class="py-space-sm px-space-md rounded font-button-label text-button-label bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors">Cancel</button>
+          <NuxtLink to="/admin/categories" class="py-space-sm px-space-md rounded font-button-label text-button-label bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors"> Cancel </NuxtLink>
           <button
             type="submit"
             :disabled="isSubmitting"
-            class="flex items-center justify-center gap-space-2xs py-space-sm px-space-lg rounded font-button-label text-button-label bg-primary text-on-primary hover:bg-primary-container shadow-sm transition-all"
+            class="flex items-center justify-center gap-space-2xs py-space-sm px-space-lg rounded font-button-label text-button-label bg-primary text-on-primary hover:bg-primary-container shadow-sm transition-all cursor-pointer"
           >
             <Icon name="check" class="w-5 h-5" />
             <span>{{ isSubmitting ? "Creating..." : "Create Category" }}</span>

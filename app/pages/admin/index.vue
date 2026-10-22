@@ -66,7 +66,31 @@ const handleDelete = async (id: string) => {
     </div>
 
     <div class="bg-surface-container-low rounded shadow-sm overflow-hidden mb-space-md">
-      <div class="overflow-x-auto">
+      <div v-if="data?.articles.length === 0" class="py-space-2xl px-space-lg text-center flex flex-col items-center justify-center max-w-lg mx-auto">
+        <div class="w-16 h-16 rounded-2xl bg-surface-container-highest/70 flex items-center justify-center text-primary border border-outline-variant/30 mb-space-md shadow-inner">
+          <Icon name="file_text" class="w-8 h-8 opacity-70" />
+        </div>
+
+        <span class="inline-flex items-center gap-space-2xs px-space-xs py-space-3xs rounded-full bg-surface-container font-meta-tag text-meta-tag text-tertiary mb-space-xs">
+          <span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+          Empty Repository
+        </span>
+
+        <h3 class="font-headline-md text-headline-md text-on-surface tracking-tight mb-space-2xs">No Articles in Repository</h3>
+
+        <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed mb-space-lg">Your digital garden currently has no dispatches, technical essays, or personal notes. Start writing to document your first ideas.</p>
+
+        <div class="flex flex-col sm:flex-row items-center gap-space-sm w-full justify-center">
+          <NuxtLink
+            to="/admin/editor"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-space-2xs px-space-md py-space-xs rounded bg-primary text-on-primary font-button-label text-button-label hover:bg-primary-container shadow-sm transition-all"
+          >
+            <Icon name="draw" class="w-4.5 h-4.5" />
+            <span>+ Create First Dispatch</span>
+          </NuxtLink>
+        </div>
+      </div>
+      <div v-else class="overflow-x-auto">
         <table class="w-full text-left border-collapse">
           <thead>
             <tr class="bg-surface-container text-tertiary font-meta-tag text-meta-tag uppercase tracking-wider">
@@ -105,8 +129,11 @@ const handleDelete = async (id: string) => {
                 </span>
               </td>
               <td class="py-space-md px-space-md align-middle">
-                <span class="inline-flex items-center gap-space-2xs px-space-xs py-space-3xs rounded bg-secondary-container/40 text-on-secondary-container font-button-label text-button-label">
-                  <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                <span
+                  class="inline-flex items-center gap-space-2xs px-space-xs py-space-3xs rounded font-button-label text-button-label"
+                  :class="[article?.status === 'published' ? 'bg-secondary-container/40 text-on-secondary-container' : 'bg-gray-500/20 text-gray-500']"
+                >
+                  <span class="w-1.5 h-1.5 rounded-full" :class="[article?.status === 'published' ? 'bg-secondary' : 'bg-gray-400']"></span>
                   {{ article?.status?.toUpperCase() }}
                 </span>
               </td>
