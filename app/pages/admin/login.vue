@@ -61,10 +61,6 @@ const togglePasswordVisibility = () => {
             <Icon name="west" class="w-4.5 h-4.5 transition-transform group-hover:-translate-x-0.5" />
             <span>Return to Public Garden</span>
           </NuxtLink>
-          <span class="inline-flex items-center gap-space-3xs font-meta-tag text-meta-tag px-space-xs py-space-3xs bg-surface-container text-tertiary rounded">
-            <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
-            NODE SECURE
-          </span>
         </div>
 
         <div class="flex flex-col items-center text-center space-y-space-xs pt-space-xs">
@@ -170,7 +166,7 @@ const togglePasswordVisibility = () => {
 
         <div class="pt-space-sm flex flex-col space-y-space-xs">
           <div class="text-center pt-space-xs">
-            <p class="font-meta-tag text-meta-tag text-tertiary">Encrypted session via Nitro SSR · Digital Garden Admin v3.2.0</p>
+            <p class="font-meta-tag text-meta-tag text-tertiary">Encrypted session via Nitro SSR</p>
           </div>
         </div>
       </div>
