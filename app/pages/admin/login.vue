@@ -17,6 +17,7 @@ const [password, passwordAttrs] = defineField("password");
 const { authClient, fetchSession } = useAuth();
 
 const submitError = ref("");
+const showPassword = ref(false);
 
 const onSubmit = handleSubmit(async (values) => {
   submitError.value = "";
@@ -43,6 +44,10 @@ const authMode = ref<"credentials" | "magic">("credentials");
 function setAuthMode(mode: "credentials" | "magic") {
   authMode.value = mode;
 }
+
+const togglePasswordVisibility = () => {
+  showPassword.value = !showPassword.value;
+};
 </script>
 
 <template>
@@ -112,7 +117,7 @@ function setAuthMode(mode: "credentials" | "magic") {
           </div>
           <div class="space-y-space-2xs">
             <div class="flex items-center justify-between">
-              <label class="font-button-label text-button-label text-on-surface" htmlFor="admin-password">Master Passkey</label>
+              <label class="font-button-label text-button-label text-on-surface" htmlFor="admin-password">Passkey</label>
               <button class="font-meta-tag text-meta-tag text-primary hover:underline" type="button">Reset key?</button>
             </div>
             <div class="relative">
@@ -122,11 +127,11 @@ function setAuthMode(mode: "credentials" | "magic") {
                 id="admin-password"
                 v-model="password"
                 v-bind="passwordAttrs"
-                type="password"
+                :type="showPassword ? 'text' : 'password'"
                 defaultValue=""
               />
-              <button class="absolute right-space-sm top-1/2 -translate-y-1/2 text-tertiary hover:text-on-surface transition-colors" title="Reveal password" type="button">
-                <Icon name="visibility" class="w-5 h-5" />
+              <button @click="togglePasswordVisibility" class="absolute right-space-sm top-1/2 -translate-y-1/2 text-tertiary hover:text-on-surface transition-colors" title="Reveal password" type="button">
+                <Icon :name="showPassword ? 'visibility_off' : 'visibility'" class="w-5 h-5" />
               </button>
             </div>
           </div>
@@ -164,14 +169,6 @@ function setAuthMode(mode: "credentials" | "magic") {
         </form>
 
         <div class="pt-space-sm flex flex-col space-y-space-xs">
-          <div class="flex items-center justify-between text-tertiary font-meta-tag text-meta-tag">
-            <span class="flex items-center gap-space-3xs">
-              <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-              ACTIVE NODES: 84
-            </span>
-            <span>LAST SYNC: 14m AGO</span>
-            <span>VER: 3.2.0-NITRO</span>
-          </div>
           <div class="text-center pt-space-xs">
             <p class="font-meta-tag text-meta-tag text-tertiary">Encrypted session via Nitro SSR · Digital Garden Admin v3.2.0</p>
           </div>

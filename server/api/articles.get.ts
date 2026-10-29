@@ -12,10 +12,17 @@ export default defineEventHandler(async (event) => {
       orderBy: [desc(articles.createdAt)],
     });
 
+    const articleCount = allArticles.length;
+    const categoryCount = new Set(allArticles.map((article) => article?.category?.id)).size;
+    const tagCount = new Set(allArticles.flatMap((article) => article?.articleTags?.map((tag) => tag?.id))).size;
+
     return {
       success: true,
       message: "Articles retrieved successfully",
       articles: allArticles,
+      article_count: articleCount,
+      category_count: categoryCount,
+      tag_count: tagCount,
     };
   } catch (error) {
     throw createError({

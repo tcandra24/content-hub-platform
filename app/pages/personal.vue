@@ -33,33 +33,26 @@ const { data } = await useFetch("/api/articles", {
         </div>
       </div>
 
-      <div class="mt-space-lg grid grid-cols-2 sm:grid-cols-4 gap-space-sm">
+      <div class="mt-space-lg grid grid-cols-2 sm:grid-cols-3 gap-space-sm">
         <div class="p-space-sm rounded-xl bg-surface-container-low flex flex-col">
-          <span class="font-meta-tag text-meta-tag text-tertiary">SYSTEM MATURITY</span>
+          <span class="font-meta-tag text-meta-tag text-tertiary">Categories</span>
           <div class="flex items-baseline gap-space-2xs mt-space-3xs">
-            <span class="font-headline-sm text-headline-sm text-on-surface">19</span>
-            <span class="font-meta-tag text-meta-tag text-secondary">Evergreen</span>
+            <span class="font-headline-sm text-headline-sm text-on-surface">{{ data?.category_count ?? "-" }}</span>
+            <span class="font-meta-tag text-meta-tag text-secondary">Category</span>
           </div>
         </div>
         <div class="p-space-sm rounded-xl bg-surface-container-low flex flex-col">
-          <span class="font-meta-tag text-meta-tag text-tertiary">LINES OF NOTE CODE</span>
+          <span class="font-meta-tag text-meta-tag text-tertiary">Tags</span>
           <div class="flex items-baseline gap-space-2xs mt-space-3xs">
-            <span class="font-headline-sm text-headline-sm text-on-surface">4,812</span>
-            <span class="font-meta-tag text-meta-tag text-primary">snippets</span>
+            <span class="font-headline-sm text-headline-sm text-on-surface">{{ data?.tag_count ?? "-" }}</span>
+            <span class="font-meta-tag text-meta-tag text-primary">Tag</span>
           </div>
         </div>
         <div class="p-space-sm rounded-xl bg-surface-container-low flex flex-col">
-          <span class="font-meta-tag text-meta-tag text-tertiary">ACTIVE REPOSITORIES</span>
+          <span class="font-meta-tag text-meta-tag text-tertiary">Articles</span>
           <div class="flex items-baseline gap-space-2xs mt-space-3xs">
-            <span class="font-headline-sm text-headline-sm text-on-surface">12</span>
-            <span class="font-meta-tag text-meta-tag text-tertiary">mirrored</span>
-          </div>
-        </div>
-        <div class="p-space-sm rounded-xl bg-surface-container-low flex flex-col">
-          <span class="font-meta-tag text-meta-tag text-tertiary">CYCLE FREQUENCY</span>
-          <div class="flex items-baseline gap-space-2xs mt-space-3xs">
-            <span class="font-headline-sm text-headline-sm text-on-surface">3.4d</span>
-            <span class="font-meta-tag text-meta-tag text-secondary">last commit</span>
+            <span class="font-headline-sm text-headline-sm text-on-surface">{{ data?.article_count ?? "-" }}</span>
+            <span class="font-meta-tag text-meta-tag text-tertiary">Article</span>
           </div>
         </div>
       </div>

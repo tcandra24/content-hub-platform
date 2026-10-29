@@ -69,20 +69,10 @@ const isActive = (link: { path: string }) => {
         <div class="grid grid-cols-1 md:grid-cols-12 gap-space-2xl mb-space-2xl">
           <div class="md:col-span-5 space-y-space-sm">
             <div class="flex items-center gap-space-xs">
-              <NuxtImg
-                alt="Atelier Garden Logo"
-                class="h-6 w-auto object-contain opacity-80"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRMXroZIvYWvsJaXaa8ttDSPvk3qeGq6TprkDYInV7GPxiWD8UlH3DTZvLFIvIcI9c6lqE3lLeB0zjFoL0WV0iOl4ZYZ7IsBVm8_C83ZazsjrFoCFiXc2dhjF_gDW6AV-cojIvirDchm-BApid_sxQoXcmqAZtCMO-8G9ZpPSmgaEnq-bY0KDrNSTgsIbrvwL8ud87Y2r70Xi3rlZzfuWeBRDHx7X9ysobza8ZxyufBuNBacxTIKhp"
-              />
+              <NuxtImg alt="Atelier Garden Logo" class="h-6 w-auto object-contain opacity-80" src="/logo.png" />
               <span class="font-headline-sm text-headline-sm text-on-surface">Chronicle &amp; Code</span>
             </div>
             <p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm">An open-access notebook documenting systemic software architecture, quiet interfaces, and deliberate craftsmanship.</p>
-            <div class="pt-space-xs">
-              <span class="inline-flex items-center gap-space-xs font-meta-tag text-meta-tag text-secondary">
-                <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
-                GARDEN HEALTH: EVERGREEN
-              </span>
-            </div>
           </div>
           <div class="md:col-span-4 space-y-space-sm">
             <h4 class="font-button-label text-button-label text-on-surface uppercase tracking-wider">Dispatches</h4>
@@ -102,13 +92,12 @@ const isActive = (link: { path: string }) => {
               <li class="flex items-center gap-space-xs"><Icon name="code" class="w-[1rem] h-[1rem] text-tertiary" /><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">github.com/chronicle</a></li>
               <li class="flex items-center gap-space-xs"><Icon name="alternate_email" class="w-[1rem] h-[1rem] text-tertiary" /><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">x.com/devjournal</a></li>
               <li class="flex items-center gap-space-xs"><Icon name="badge" class="w-[1rem] h-[1rem] text-tertiary" /><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">read.cv/engineer</a></li>
-              <li class="flex items-center gap-space-xs"><Icon name="rss_feed" class="w-[1rem] h-[1rem] text-tertiary" /><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">index.xml (Atom)</a></li>
             </ul>
           </div>
         </div>
         <div class="pt-space-lg border-t border-outline-variant/30 flex flex-col sm:flex-row items-center justify-between gap-space-sm font-meta-tag text-meta-tag text-tertiary">
           <div>Type set in Newsreader &amp; Plus Jakarta Sans. Built with quiet rigor.</div>
-          <div>© 2024 Chronicle &amp; Code. Content licensed CC BY-NC 4.0.</div>
+          <div>© {{ new Date().getFullYear() }} Chronicle &amp; Code.</div>
         </div>
       </div>
     </footer>
